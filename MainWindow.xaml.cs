@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using CryptocurrencieApp.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -18,6 +20,8 @@ namespace CryptocurrencieApp
     {
         public MainWindow()
         {
+            DataContext = (App.Current as App)!.Host.Services.GetService<MainViewModel>();
+
             InitializeComponent();
         }
     }
