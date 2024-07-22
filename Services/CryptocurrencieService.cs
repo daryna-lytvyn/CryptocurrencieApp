@@ -12,15 +12,17 @@ using System.Threading.Tasks;
 
 namespace CryptocurrencieApp.Services
 {
-    internal class CryptocurrencieService : ICryptocurrencieService
+    public class CryptocurrencieService : ICryptocurrencieService
     {
         private readonly HttpClient _httpClient;
         private readonly IOptions<CryptocurrencieOptions> _сryptocurrencieOptions;
+        private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-        public CryptocurrencieService(HttpClient httpClient, IOptions<CryptocurrencieOptions> сryptocurrencieOptions)
+        public CryptocurrencieService(HttpClient httpClient, IOptions<CryptocurrencieOptions> сryptocurrencieOptions, JsonSerializerOptions jsonSerializerOptions)
         {
             _httpClient = httpClient;
             _сryptocurrencieOptions = сryptocurrencieOptions;
+            _jsonSerializerOptions = jsonSerializerOptions;
         }
 
         public async Task<IReadOnlyList<Cryptocurrencie>> GetCryptocurrenciesAsync(CancellationToken cancellationToken = default)
@@ -33,14 +35,7 @@ namespace CryptocurrencieApp.Services
 
             response.EnsureSuccessStatusCode();
 
-            var options = new JsonSerializerOptions()
-            {
-                PropertyNameCaseInsensitive = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowReadingFromString
-            };
-
-            var cryptocurrencies = await response.Content.ReadFromJsonAsync<ResponseCryptocurrencie>(options, cancellationToken)
+            var cryptocurrencies = await response.Content.ReadFromJsonAsync<ResponseCryptocurrencie>(_jsonSerializerOptions, cancellationToken)
                                                 .ConfigureAwait(false);
                                                
             return cryptocurrencies.Data!.AsReadOnly();
