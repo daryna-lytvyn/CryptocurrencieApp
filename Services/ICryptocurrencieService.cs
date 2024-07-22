@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CryptocurrencieApp.Services
 {
-    internal interface ICryptocurrencieService
+    public interface ICryptocurrencieService
     {
         Task<IReadOnlyList<Cryptocurrencie>> GetCryptocurrenciesAsync(CancellationToken cancellationToken = default);
     }

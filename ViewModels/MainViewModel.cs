@@ -12,14 +12,21 @@ using System.Windows.Threading;
 
 namespace CryptocurrencieApp.ViewModels
 {
-    internal partial class MainViewModel : ObservableObject
+    public partial class MainViewModel : ObservableObject
     {
         private readonly ICryptocurrencieService _cryptocurrencieService;
+
+        [ObservableProperty]
+        private string _searchQuery;
+
         public ObservableCollection<Cryptocurrencie> Cryptocurrencies { get; } = new();
+        public ObservableCollection<Cryptocurrencie> FilteredCryptocurrencies { get; } = new();
+
 
         public MainViewModel(ICryptocurrencieService cryptocurrencieService)
         {
             _cryptocurrencieService = cryptocurrencieService;
+            LoadCryptocurrencies();
         }
 
         [RelayCommand]
@@ -34,6 +41,31 @@ namespace CryptocurrencieApp.ViewModels
                     Cryptocurrencies.Add(cryptocurrencie);
                 }
             }, DispatcherPriority.Background);
+        }
+
+        [RelayCommand]
+        private async void FilterCryptocurrencies()
+        {
+            FilteredCryptocurrencies.Clear();
+
+            var filtered = Cryptocurrencies.Where(c =>
+                string.IsNullOrEmpty(SearchQuery) ||
+                c.Name.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase) ||
+                c.Symbol.Contains(SearchQuery, StringComparison.OrdinalIgnoreCase));
+
+            await Dispatcher.CurrentDispatcher.InvokeAsync(() =>
+            {
+                foreach (var cryptocurrencie in filtered)
+                {
+                    FilteredCryptocurrencies.Add(cryptocurrencie);
+                }
+            }, DispatcherPriority.Background);
+        }
+
+        private async void LoadCryptocurrencies()
+        {
+            await GetCryptocurrenciesAsync();
+            FilterCryptocurrencies();
         }
     }
 }

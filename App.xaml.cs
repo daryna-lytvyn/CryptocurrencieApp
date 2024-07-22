@@ -8,6 +8,7 @@ using Microsoft.Extensions.Http;
 
 using System.Configuration;
 using System.Data;
+using System.Text.Json;
 using System.Windows;
 
 namespace CryptocurrencieApp
@@ -31,6 +32,14 @@ namespace CryptocurrencieApp
                         })
                         .ConfigureServices(services =>
                         {
+                            var jsonOptions = new JsonSerializerOptions
+                            {
+                                PropertyNameCaseInsensitive = true,
+                                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                                NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.AllowReadingFromString
+                            };
+
+                            services.AddSingleton(jsonOptions);
                             services.AddSingleton<MainViewModel>();
                             services.AddSingleton<ICryptocurrencieService, CryptocurrencieService>();
                             services.AddOptions<CryptocurrencieOptions>()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CryptocurrencieApp.Services
 {
-    internal class CryptocurrencieOptions
+    public class CryptocurrencieOptions
     {
         public string BaseUri { get; set; }
     }
