@@ -1,4 +1,5 @@
-﻿using CryptocurrencieApp.Services;
+﻿using CryptocurrencieApp.Models;
+using CryptocurrencieApp.Services;
 using CryptocurrencieApp.ViewModels;
 
 using Microsoft.Extensions.Configuration;
@@ -46,6 +47,9 @@ namespace CryptocurrencieApp
                                     .BindConfiguration("CryptocurrencieOptions");
 
                             services.AddHttpClient<CryptocurrencieService>();
+
+                            services.AddSingleton<Cryptocurrencie>();
+                            services.AddTransient<DetailViewModel>();
                         })
                         .Build();
         }

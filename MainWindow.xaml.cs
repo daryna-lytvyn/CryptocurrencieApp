@@ -1,4 +1,5 @@
-﻿using CryptocurrencieApp.ViewModels;
+﻿using CryptocurrencieApp.Models;
+using CryptocurrencieApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 using System.Windows;
@@ -23,6 +24,29 @@ namespace CryptocurrencieApp
             DataContext = (App.Current as App)!.Host.Services.GetService<MainViewModel>();
 
             InitializeComponent();
+        }
+
+        private void OpenDetailWindow(Cryptocurrencie selectedCryptocurrencie)
+        {
+            if (selectedCryptocurrencie is null)
+            {
+                return;
+            }
+
+            var detailViewModel = (App.Current as App)!.Host.Services.GetService<DetailViewModel>();
+            detailViewModel.CurrentCryptocurrencie = selectedCryptocurrencie;
+
+            var detailWindow = new DetailWindow { DataContext = detailViewModel };
+            detailWindow.Show();
+        }
+
+        private void FilteredCryptocurrencies_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var selectedCryptocurrencie = (sender as ListBox)?.SelectedItem as Cryptocurrencie;
+            if (selectedCryptocurrencie is not null)
+            {
+                OpenDetailWindow(selectedCryptocurrencie);
+            }
         }
     }
 }

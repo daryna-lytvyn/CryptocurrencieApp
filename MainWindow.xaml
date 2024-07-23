@@ -11,11 +11,10 @@
     Title="Cryptocurrencies" 
     WindowState="Maximized"
     MinHeight="750" 
-    MinWidth="950"
+    MinWidth="1050"
     Background="#101010"
     mc:Ignorable="d">
     <Window.Resources>
-        <FontFamily x:Key="GeomRegular">/CryptocurrencieApp;component/Fonts/XXIIGeom.otf#XXIIGeom</FontFamily>
         <svg:SvgViewbox x:Key="DarkModeIcon" Source="C:\Users\darin\source\repos\CryptocurrencieApp\Images\DarkModeIcon.svg" MessageBackground="{x:Null}"/>
         <svg:SvgViewbox x:Key="SearchIcon" Source="C:\Users\darin\source\repos\CryptocurrencieApp\Images\SearchIcon.svg" MessageBackground="{x:Null}"/>
 
@@ -34,6 +33,7 @@
         <Style x:Key="TableHeaderTextStyle" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
             <Setter Property="Foreground" Value="#969696"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
@@ -41,6 +41,7 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Foreground" Value="#969696"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Margin" Value="0,32,0,32"/>
         </Style>
@@ -69,11 +70,11 @@
         <Border 
             Grid.Column="1" 
             Background="#1B1B1B" 
-            CornerRadius="60" Width="850" Height="550">
+            CornerRadius="60" Width="950" Height="550">
             
-            <StackPanel Width="750" Height="550">
-                <Border Background="#2C2C2C" Width="350" Height="32" CornerRadius="15" Margin="300,32,0,0">
-                    <Grid Background="#2C2C2C"  Width="320" >
+            <StackPanel Width="850" Height="550">
+                <Border Width="425" Height="32" CornerRadius="15"  Background="#2C2C2C" Margin="400,32,0,0">
+                    <Grid Background="#2C2C2C"  Width="375" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="24"/>
                             <ColumnDefinition />
@@ -85,7 +86,7 @@
                             Background="Transparent"
                             BorderBrush="Transparent"/>
                         <TextBox 
-                            Grid.Column="1" FontSize="16" 
+                            Grid.Column="1" FontSize="16" FontFamily="Verdana"
                             Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                             VerticalAlignment ="Center"
                             Margin="8,0,0,0"
@@ -96,11 +97,11 @@
 
                 <Grid Margin ="0,32,0,0" Background="#1B1B1B">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="36"/>
-                        <ColumnDefinition Width="174"/>
-                        <ColumnDefinition Width="118"/>
-                        <ColumnDefinition Width="198"/>
-                        <ColumnDefinition Width="174"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="170"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="260"/>
+                        <ColumnDefinition Width="260"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="#" 
                                Style="{StaticResource TableHeaderTextStyle}"/>
@@ -114,27 +115,27 @@
                                Style="{StaticResource TableHeaderTextStyle}"/>
                 </Grid>
                 <ListBox 
-            x:Name="Cryptocurrencies"
-                VerticalAlignment="Stretch"
-                Foreground ="#969696"
-                Background="#1B1B1B"
-                ItemsSource="{Binding FilteredCryptocurrencies,  Mode=OneWay}"
-                ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                SelectionMode="Single"
-                Height="350"
-                BorderBrush="Transparent"
-                BorderThickness="0"
-                Margin ="0,32,0,32">
-
+                    x:Name="Cryptocurrencies"
+                    VerticalAlignment="Stretch"
+                    Foreground ="#969696"
+                    Background="#1B1B1B"
+                    ItemsSource="{Binding FilteredCryptocurrencies,  Mode=OneWay}"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                    SelectionMode="Single"
+                    Height="350"
+                    BorderBrush="Transparent"
+                    BorderThickness="0"
+                    Margin ="0,32,0,32"
+                    MouseDoubleClick="FilteredCryptocurrencies_MouseDoubleClick" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="36"/>
-                                    <ColumnDefinition Width="174"/>
-                                    <ColumnDefinition Width="118"/>
-                                    <ColumnDefinition Width="198"/>
-                                    <ColumnDefinition Width="174"/>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="260"/>
+                                    <ColumnDefinition Width="260"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="{Binding Rank}" Style="{StaticResource TableTextStyle}"/>
                                 <TextBlock Grid.Column="1" Text="{Binding Name}" Style="{StaticResource TableTextStyle}" />
