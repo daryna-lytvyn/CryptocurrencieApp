@@ -50,9 +50,10 @@ namespace CryptocurrencieApp
 
                             services.AddSingleton<Cryptocurrencie>();
                             services.AddTransient<DetailViewModel>();
+                            services.AddSingleton<ConvertViewModel>();
                         })
                         .Build();
         }
-     }
+    }
 
 }

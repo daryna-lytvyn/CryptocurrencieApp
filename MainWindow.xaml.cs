@@ -48,5 +48,25 @@ namespace CryptocurrencieApp
                 OpenDetailWindow(selectedCryptocurrencie);
             }
         }
+
+        private void ConvertMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+            var convertWindow = new ConvertWindow
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.Manual,
+                Left = this.Left,
+                Top = this.Top,
+                Width = this.Width,
+                Height = this.Height
+            };
+
+            convertWindow.Show();
+
+            this.Hide();
+
+
+        }
     }
 }
