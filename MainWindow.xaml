@@ -15,8 +15,12 @@
     Background="#101010"
     mc:Ignorable="d">
     <Window.Resources>
-        <svg:SvgViewbox x:Key="DarkModeIcon" Source="C:\Users\darin\source\repos\CryptocurrencieApp\Images\DarkModeIcon.svg" MessageBackground="{x:Null}"/>
-        <svg:SvgViewbox x:Key="SearchIcon" Source="C:\Users\darin\source\repos\CryptocurrencieApp\Images\SearchIcon.svg" MessageBackground="{x:Null}"/>
+        <svg:SvgViewbox x:Key="DarkModeIcon" 
+                        Source="C:\Users\darin\source\repos\CryptocurrencieApp\Images\DarkModeIcon.svg" 
+                        MessageBackground="{x:Null}"/>
+        <svg:SvgViewbox x:Key="SearchIcon" 
+                        Source="C:\Users\darin\source\repos\CryptocurrencieApp\Images\SearchIcon.svg" 
+                        MessageBackground="{x:Null}"/>
 
         <Style x:Key="MainMenu" TargetType="Menu">
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -47,8 +51,6 @@
         </Style>
     </Window.Resources>
 
-
-
     <StackPanel >
         <Grid Margin="128,32,128,52">
             <Grid.ColumnDefinitions>
@@ -56,35 +58,42 @@
                 <ColumnDefinition  Width="400"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="{StaticResource DarkModeIcon}" Background="#101010" BorderBrush="Transparent" BorderThickness="0"/>
 
-            <Border Grid.Column="1" Background="#1B1B1B" CornerRadius="30" Width="350" Height="64">
+            <Button Grid.Column="0" Content="{StaticResource DarkModeIcon}" 
+                    Background="#101010" BorderBrush="Transparent" 
+                    BorderThickness="0"/>
+
+            <Border Grid.Column="1" Background="#1B1B1B" CornerRadius="30" 
+                    Width="350" Height="64">
                 <Menu Style="{StaticResource MainMenu}">
                     <MenuItem Header="Cryptocurrencies"/>
-                    <MenuItem Header="Convert" Margin ="32,0,0,0"/>
+                    <MenuItem Header="Convert" Margin ="32,0,0,0" 
+                              Click="ConvertMenuItem_Click"/>
                 </Menu>
             </Border>
         </Grid>
-
 
         <Border 
             Grid.Column="1" 
             Background="#1B1B1B" 
             CornerRadius="60" Width="950" Height="550">
-            
+
             <StackPanel Width="850" Height="550">
-                <Border Width="425" Height="32" CornerRadius="15"  Background="#2C2C2C" Margin="400,32,0,0">
+                <Border Width="425" Height="32" CornerRadius="15"  
+                        Background="#2C2C2C" Margin="400,32,0,0">
                     <Grid Background="#2C2C2C"  Width="375" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="24"/>
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
+
                         <Button
                             Grid.Column="0"
                             Content="{StaticResource SearchIcon}"
                             Command="{Binding FilterCryptocurrenciesCommand}"
                             Background="Transparent"
                             BorderBrush="Transparent"/>
+
                         <TextBox 
                             Grid.Column="1" FontSize="16" FontFamily="Verdana"
                             Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
@@ -103,6 +112,7 @@
                         <ColumnDefinition Width="260"/>
                         <ColumnDefinition Width="260"/>
                     </Grid.ColumnDefinitions>
+
                     <TextBlock Grid.Column="0" Text="#" 
                                Style="{StaticResource TableHeaderTextStyle}"/>
                     <TextBlock Grid.Column="1" Text="Name" 
@@ -127,6 +137,7 @@
                     BorderThickness="0"
                     Margin ="0,32,0,32"
                     MouseDoubleClick="FilteredCryptocurrencies_MouseDoubleClick" >
+
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -137,11 +148,17 @@
                                     <ColumnDefinition Width="260"/>
                                     <ColumnDefinition Width="260"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding Rank}" Style="{StaticResource TableTextStyle}"/>
-                                <TextBlock Grid.Column="1" Text="{Binding Name}" Style="{StaticResource TableTextStyle}" />
-                                <TextBlock Grid.Column="2" Text="{Binding Symbol}" Style="{StaticResource TableTextStyle}" />
-                                <TextBlock Grid.Column="3" Text="{Binding PriceUsd}" Style="{StaticResource TableTextStyle}" />
-                                <TextBlock Grid.Column="4" Text="{Binding ChangePercent24Hr}" Style="{StaticResource TableTextStyle}" />
+
+                                <TextBlock Grid.Column="0" Text="{Binding Rank}" 
+                                           Style="{StaticResource TableTextStyle}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Name}" 
+                                           Style="{StaticResource TableTextStyle}" />
+                                <TextBlock Grid.Column="2" Text="{Binding Symbol}" 
+                                           Style="{StaticResource TableTextStyle}" />
+                                <TextBlock Grid.Column="3" Text="{Binding PriceUsd}" 
+                                           Style="{StaticResource TableTextStyle}" />
+                                <TextBlock Grid.Column="4" Text="{Binding ChangePercent24Hr}" 
+                                           Style="{StaticResource TableTextStyle}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
